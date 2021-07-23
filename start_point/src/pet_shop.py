@@ -58,3 +58,31 @@ def get_customer_pet_count(customer):
 
 def add_pet_to_customer(customer, pet):
     customer["pets"].append(pet)
+
+def customer_can_afford_pet(customer, pet):
+    if customer["cash"] >= pet["price"]:
+        return True
+    return False
+
+def sell_pet_to_customer(pet_shop, pet, customer):
+    # 1. transfer money from customer to shop
+    # 1.05 check customer has enough money
+    # 1.1 remove money from customer
+    # 1.2 add money to shop
+    # 2. transfer pet from shop to customer
+    # 2.05 increment pets sold
+    # 2.1 remove pet from shop
+    # 2.2 add pet to customer
+    # pdb.set_trace()
+    
+    if customer_can_afford_pet(customer, pet) == True:
+        price = pet["price"]
+        name = pet["name"]
+        remove_customer_cash(customer, price)
+        add_or_remove_cash(pet_shop, price)
+        increase_pets_sold(pet_shop, 1)
+        remove_pet_by_name(pet_shop, name)
+        add_pet_to_customer(customer, pet)
+
+
+
