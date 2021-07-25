@@ -34,6 +34,7 @@ def find_pet_by_name(pet_shop, name):
     for pet in pet_shop["pets"]:
         if pet["name"] == name:
             return pet
+    return None
 
 def remove_pet_by_name(pet_shop, name):
     index = 0
@@ -73,16 +74,17 @@ def sell_pet_to_customer(pet_shop, pet, customer):
     # 2.05 increment pets sold
     # 2.1 remove pet from shop
     # 2.2 add pet to customer
-    # pdb.set_trace()
+    pdb.set_trace()
     
-    if customer_can_afford_pet(customer, pet) == True:
-        price = pet["price"]
-        name = pet["name"]
-        remove_customer_cash(customer, price)
-        add_or_remove_cash(pet_shop, price)
-        increase_pets_sold(pet_shop, 1)
-        remove_pet_by_name(pet_shop, name)
-        add_pet_to_customer(customer, pet)
+    if find_pet_by_name(pet_shop, pet["name"]) == True:
+        if customer_can_afford_pet(customer, pet) == True:
+            price = pet["price"]
+            name = pet["name"]
+            remove_customer_cash(customer, price)
+            add_or_remove_cash(pet_shop, price)
+            increase_pets_sold(pet_shop, 1)
+            remove_pet_by_name(pet_shop, name)
+            add_pet_to_customer(customer, pet)
 
 
 
